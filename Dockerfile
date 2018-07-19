@@ -9,3 +9,5 @@ RUN vgo install .
 
 FROM debian:stretch-slim
 COPY --from=build /go/bin/recurse-world /usr/bin/recurse-world
+EXPOSE 8080
+CMD ["/usr/bin/recurse-world"]
