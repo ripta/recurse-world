@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: recurse-world
+spec:
+  rules:
+    - host: recurse-world.$NAMESPACE.$CLUSTER_DOMAIN
+      http:
+        paths:
+          - backend:
+              serviceName: recurse-world
+              servicePort: 8080
+

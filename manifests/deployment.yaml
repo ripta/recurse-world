@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recurse-world
+  labels:
+    app: recurse-world
+    team: core
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: recurse-world
+      team: core
+  template:
+    metadata:
+      labels:
+        app: recurse-world
+        team: core
+    spec:
+      containers:
+        - name: main
+          image: ripta/recurse-world@sha256:3c5442856abb8155eb49f42c023d950217d6b19cf0d6bcb277cbb36a3cd10d15
+          args:
+            - /usr/bin/recurse-world
+            - -port=8080
+            - -upstream=localhost:8080
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "250m"
