@@ -3,17 +3,19 @@ package main
 import (
 	"flag"
 	"log"
+	"os"
 	"strconv"
 
 	"github.com/ripta/recurse-world/pkg/server"
-	"github.com/satori/go.uuid"
 	"go.uber.org/zap"
 )
 
 var (
 	port         = flag.Int("port", 8080, "the port number to listen on")
-	serverName   = flag.String("server-name", "", "the name of the server (default: random UUID)")
+	serverName   = flag.String("server-name", "", "the name of the server (default: hostname)")
 	upstreamHost = flag.String("upstream", "localhost:8080", "the upstream to use")
+	withName     = flag.Bool("with-name", false, "include server name in response")
+	withTime     = flag.Bool("with-time", false, "include time in response")
 )
 
 func main() {
@@ -30,13 +32,15 @@ func run() {
 	defer logger.Sync()
 
 	if *serverName == "" {
-		*serverName = uuid.NewV4().String()
+		*serverName, _ = os.Hostname()
 	}
 
 	s := &server.Server{
 		Logger:       logger,
 		Name:         *serverName,
 		UpstreamHost: *upstreamHost,
+		WithName:     *withName,
+		WithTime:     *withTime,
 	}
 	if err := s.Serve(":" + strconv.Itoa(*port)); err != nil {
 		logger.Error("server ended", zap.Error(err))
