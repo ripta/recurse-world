@@ -10,6 +10,8 @@ type Server struct {
 	Logger       *zap.Logger
 	Name         string
 	UpstreamHost string
+	WithName     bool
+	WithTime     bool
 }
 
 func (s *Server) Serve(addr string) error {

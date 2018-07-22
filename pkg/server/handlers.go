@@ -13,9 +13,18 @@ func (s *Server) echoHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) recurseHandler(w http.ResponseWriter, r *http.Request) {
-	s.Logger.Info(r.Method + " " + r.URL.Path)
-	stamp := time.Now().Format("2006-01-02T15:04:05.000000Z07:00") + " " + s.Name + " " + r.URL.Path + "\n"
+	var stamp string
+	{
+		if s.WithTime {
+			stamp = stamp + time.Now().Format("2006-01-02T15:04:05.000000Z07:00") + " "
+		}
+		if s.WithName {
+			stamp = stamp + s.Name + " "
+		}
+		stamp = stamp + r.URL.Path + "\n"
+	}
 
+	s.Logger.Info(r.Method + " " + r.URL.Path)
 	if r.URL.Path == "/" {
 		io.WriteString(w, stamp)
 		return
