@@ -1,0 +1,25 @@
+project_name: recurse-world
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goarch:
+      - amd64
+    goos:
+      - darwin
+      - linux
+archive:
+  wrap_in_directory: true
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^README'
+dockers:
+  - image: ripta/recurse-world
+    tag_templates:
+      - 'latest'
+      - 'v{{ .Version }}'
+snapshot:
+  name_template: "{{ .Tag }}-next"
