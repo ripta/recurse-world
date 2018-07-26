@@ -11,7 +11,7 @@ Open 3 terminals, so you can run 3 copies of the server on different ports, wher
 ```
 ./recurse-world -port 8080 -upstream localhost:8081 -server-name zero
 ./recurse-world -port 8081 -upstream localhost:8082 -server-name one
-./recurse-world -port 8082 -upstream localhost:8080 -server-name zero
+./recurse-world -port 8082 -upstream localhost:8080 -server-name two
 ```
 
 When you do a curl, you'll see:
