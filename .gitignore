@@ -1,3 +1,4 @@
 /recurse-world
 /manifests/ingress.yaml
 /dist
+/ci/.credentials.yaml
