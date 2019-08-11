@@ -2,8 +2,7 @@
 Hello world app in golang that calls to other hello world apps
 
 ```
-go get -u golang.org/x/vgo
-vgo build .
+go build .
 ```
 
 Open 3 terminals, so you can run 3 copies of the server on different ports, where #0 calls #1, #1 calls #2, and #2 calls #0.
