@@ -1,4 +1,4 @@
-FROM golang:1.12-stretch AS build
+FROM golang:1.17-stretch AS build
 ENV DEBIAN_FRONTEND=noninteractive
 ENV CGO_ENABLED=0
 RUN apt-get update && apt-get install -y gcc git make
