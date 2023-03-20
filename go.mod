@@ -2,7 +2,7 @@ module github.com/ripta/recurse-world
 
 go 1.17
 
-require go.uber.org/zap v1.21.0
+require go.uber.org/zap v1.24.0
 
 require (
 	go.uber.org/atomic v1.9.0 // indirect
